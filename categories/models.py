@@ -87,9 +87,13 @@ class Category(CategoryBase):
 
         super(Category, self).save(*args, **kwargs)
 
+    def natural_key(self):
+        return (self.name)
+
     class Meta(CategoryBase.Meta):
         verbose_name = _('category')
         verbose_name_plural = _('categories')
+        unique_together = (('name'),)
 
     class MPTTMeta:
         order_insertion_by = ('order', 'name')
